@@ -13,7 +13,7 @@
 
 short tile_table[15][30];
 
-SPRITE sprite_table[8] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+SPRITE sprite_table[32] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 unsigned char used_sprites = 0;
 
 
@@ -131,7 +131,7 @@ void drawCustomSpriteFromFlash(short address, unsigned char width, unsigned char
 		{
 			LOWER_ADDRESS_PORT = x+j;
 			unsigned char kolor = pgm_read_byte(address++);
-			if(kolor == TRANSPARENT_COLOR) continue;
+			//if(kolor == TRANSPARENT_COLOR) continue;
 			DATA_PORT = kolor;
 			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
 			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);

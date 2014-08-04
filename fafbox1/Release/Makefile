@@ -36,10 +36,13 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../arkanoid_sprites.c \
+../controller.c \
 ../fafbox1.c \
 ../game_sprites.c \
 ../graphics.c \
 ../pikachu.c \
+../snake_sprites.c \
 ../sprites.c \
 ../tiles.c
 
@@ -52,38 +55,50 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+arkanoid_sprites.o \
+controller.o \
 fafbox1.o \
 game_sprites.o \
 graphics.o \
 graphics_interrupt.o \
 pikachu.o \
+snake_sprites.o \
 sprites.o \
 tiles.o
 
 OBJS_AS_ARGS +=  \
+arkanoid_sprites.o \
+controller.o \
 fafbox1.o \
 game_sprites.o \
 graphics.o \
 graphics_interrupt.o \
 pikachu.o \
+snake_sprites.o \
 sprites.o \
 tiles.o
 
 C_DEPS +=  \
+arkanoid_sprites.d \
+controller.d \
 fafbox1.d \
 game_sprites.d \
 graphics.d \
 graphics_interrupt.d \
 pikachu.d \
+snake_sprites.d \
 sprites.d \
 tiles.d
 
 C_DEPS_AS_ARGS +=  \
+arkanoid_sprites.d \
+controller.d \
 fafbox1.d \
 game_sprites.d \
 graphics.d \
 graphics_interrupt.d \
 pikachu.d \
+snake_sprites.d \
 sprites.d \
 tiles.d
 
@@ -98,6 +113,12 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 
