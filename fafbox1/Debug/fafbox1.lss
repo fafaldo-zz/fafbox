@@ -1,0 +1,1809 @@
+
+fafbox1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  000005c0  00000634  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000005c0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  00000634  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000097  00000000  00000000  00000d00  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .comment      0000002f  00000000  00000000  00000d97  2**0
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000098  00000000  00000000  00000dc8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000037e  00000000  00000000  00000e60  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000001c2  00000000  00000000  000011de  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000004ac  00000000  00000000  000013a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000094  00000000  00000000  0000184c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000012f  00000000  00000000  000018e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000018f  00000000  00000000  00001a0f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000058  00000000  00000000  00001b9e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__ctors_end>
+   4:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+   8:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+   c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  10:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  14:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  18:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  1c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  20:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  24:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  28:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  2c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  30:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  34:	0c 94 4a 00 	jmp	0x94	; 0x94 <__vector_13>
+  38:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  3c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  40:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  44:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  48:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  4c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  50:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  54:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  58:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  5c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  60:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  64:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  68:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  6c:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  70:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  74:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+  78:	0c 94 48 00 	jmp	0x90	; 0x90 <__bad_interrupt>
+
+0000007c <__ctors_end>:
+  7c:	11 24       	eor	r1, r1
+  7e:	1f be       	out	0x3f, r1	; 63
+  80:	cf ef       	ldi	r28, 0xFF	; 255
+  82:	d0 e1       	ldi	r29, 0x10	; 16
+  84:	de bf       	out	0x3e, r29	; 62
+  86:	cd bf       	out	0x3d, r28	; 61
+  88:	0e 94 a3 02 	call	0x546	; 0x546 <main>
+  8c:	0c 94 de 02 	jmp	0x5bc	; 0x5bc <_exit>
+
+00000090 <__bad_interrupt>:
+  90:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000094 <__vector_13>:
+.global TIMER1_COMPA_vect
+TIMER1_COMPA_vect:
+
+	// horizontal sync porch - 76 cykli
+
+	push r16 ;2
+  94:	0f 93       	push	r16
+
+	in r16, _SFR_IO_ADDR(SREG) ;1
+  96:	0f b7       	in	r16, 0x3f	; 63
+	push r16 ;2
+  98:	0f 93       	push	r16
+
+	lds r16, TCNT1L ;2
+  9a:	00 91 84 00 	lds	r16, 0x0084
+	cpi r16, 16 ;1
+  9e:	00 31       	cpi	r16, 0x10	; 16
+	breq szesnascie ;1/2
+  a0:	41 f0       	breq	.+16     	; 0xb2 <szesnascie>
+	cpi r16, 15 ;1
+  a2:	0f 30       	cpi	r16, 0x0F	; 15
+	breq pietnascie ;1/2
+  a4:	39 f0       	breq	.+14     	; 0xb4 <pietnascie>
+	cpi r16, 14 ;1
+  a6:	0e 30       	cpi	r16, 0x0E	; 14
+	breq czternascie ;1/2
+  a8:	31 f0       	breq	.+12     	; 0xb6 <czternascie>
+	cpi r16, 13 ;1
+  aa:	0d 30       	cpi	r16, 0x0D	; 13
+	breq trzynascie ;1/2
+  ac:	29 f0       	breq	.+10     	; 0xb8 <trzynascie>
+	cpi r16, 12 ;1
+  ae:	0c 30       	cpi	r16, 0x0C	; 12
+	breq dwanascie ;1/2
+  b0:	21 f0       	breq	.+8      	; 0xba <dwanascie>
+
+000000b2 <szesnascie>:
+	...
+
+000000b4 <pietnascie>:
+	...
+
+000000b6 <czternascie>:
+	...
+
+000000b8 <trzynascie>:
+	...
+
+000000ba <dwanascie>:
+dwanascie:
+
+
+	// tutaj po 24 cyklach od rozpoczêcia przerwania i od pocz¹tku HSP
+
+	cbi _SFR_IO_ADDR(SYNC_PORT), HSYNC_PIN ;2
+  ba:	58 98       	cbi	0x0b, 0	; 11
+
+	push r17 ;2
+  bc:	1f 93       	push	r17
+	push licznik_linii_reg_1 ;2
+  be:	cf 93       	push	r28
+	push licznik_linii_reg_2 ;2
+  c0:	df 93       	push	r29
+	push piksele_reg ;2
+  c2:	4f 93       	push	r20
+	lds licznik_linii_reg_1, licznik_linii_sram_1 ;2
+  c4:	c0 91 00 01 	lds	r28, 0x0100
+	lds licznik_linii_reg_2, licznik_linii_sram_2 ;2
+  c8:	d0 91 01 01 	lds	r29, 0x0101
+	lds piksele_reg, piksele_sram ;2
+  cc:	40 91 02 01 	lds	r20, 0x0102
+
+	// tutaj po 40 cyklach od HSP
+
+	//ldi r16, low(525) ;1
+	ldi r17, high(491) ;1
+  d0:	11 e0       	ldi	r17, 0x01	; 1
+	cpi licznik_linii_reg_1, low(491) ;1
+  d2:	cb 3e       	cpi	r28, 0xEB	; 235
+	cpc r17, licznik_linii_reg_2 ;1
+  d4:	1d 07       	cpc	r17, r29
+	breq wlacz_vsync ;1/2
+  d6:	11 f0       	breq	.+4      	; 0xdc <wlacz_vsync>
+	nop ;1
+  d8:	00 00       	nop
+	rjmp dalej_wlacz_vsync ;2
+  da:	01 c0       	rjmp	.+2      	; 0xde <dalej_wlacz_vsync>
+
+000000dc <wlacz_vsync>:
+
+wlacz_vsync:
+	cbi _SFR_IO_ADDR(SYNC_PORT), VSYNC_PIN ;2
+  dc:	59 98       	cbi	0x0b, 1	; 11
+
+000000de <dalej_wlacz_vsync>:
+dalej_wlacz_vsync:
+
+	// tutaj po 47 cyklach od HSP
+
+	//ldi r16, low(2) ;1
+	ldi r17, high(493) ;1
+  de:	11 e0       	ldi	r17, 0x01	; 1
+	cpi licznik_linii_reg_1, low(493) ;1
+  e0:	cd 3e       	cpi	r28, 0xED	; 237
+	cpc r17, licznik_linii_reg_2 ;1
+  e2:	1d 07       	cpc	r17, r29
+	breq wylacz_vsync ;1/2
+  e4:	11 f0       	breq	.+4      	; 0xea <wylacz_vsync>
+	nop ;1
+  e6:	00 00       	nop
+	rjmp dalej_wylacz_vsync ;2
+  e8:	01 c0       	rjmp	.+2      	; 0xec <dalej_wylacz_vsync>
+
+000000ea <wylacz_vsync>:
+
+wylacz_vsync:
+	sbi _SFR_IO_ADDR(SYNC_PORT), VSYNC_PIN ;2
+  ea:	59 9a       	sbi	0x0b, 1	; 11
+
+000000ec <dalej_wylacz_vsync>:
+dalej_wylacz_vsync:
+
+	// tutaj po 54 cyklach od HSP
+
+	//ldi r16, low(34) ;1
+	ldi r17, high(524) ;1
+  ec:	12 e0       	ldi	r17, 0x02	; 2
+	cpi licznik_linii_reg_1, low(524) ;1
+  ee:	cc 30       	cpi	r28, 0x0C	; 12
+	cpc r17, licznik_linii_reg_2 ;1
+  f0:	1d 07       	cpc	r17, r29
+	breq wlacz_piksele ;1/2
+  f2:	19 f0       	breq	.+6      	; 0xfa <wlacz_piksele>
+	nop ;1
+  f4:	00 00       	nop
+	nop ;1
+  f6:	00 00       	nop
+	rjmp dalej_wlacz_piksele ;2
+  f8:	03 c0       	rjmp	.+6      	; 0x100 <dalej_wlacz_piksele>
+
+000000fa <wlacz_piksele>:
+
+wlacz_piksele:
+	ldi piksele_reg, 1 ;1
+  fa:	41 e0       	ldi	r20, 0x01	; 1
+	clr licznik_linii_reg_1 ;1
+  fc:	cc 27       	eor	r28, r28
+	clr licznik_linii_reg_2 ;1
+  fe:	dd 27       	eor	r29, r29
+
+00000100 <dalej_wlacz_piksele>:
+	
+
+	// tutaj po 62 cyklach od HSP
+
+	//ldi r16, low(514) ;1
+	ldi r17, high(480) ;1
+ 100:	11 e0       	ldi	r17, 0x01	; 1
+	cpi licznik_linii_reg_1, low(480) ;1
+ 102:	c0 3e       	cpi	r28, 0xE0	; 224
+	cpc r17, licznik_linii_reg_2 ;1
+ 104:	1d 07       	cpc	r17, r29
+	brne nie_wylaczaj_pikseli ;1/2
+ 106:	09 f4       	brne	.+2      	; 0x10a <nie_wylaczaj_pikseli>
+	ldi piksele_reg, 0 ;1
+ 108:	40 e0       	ldi	r20, 0x00	; 0
+
+0000010a <nie_wylaczaj_pikseli>:
+
+nie_wylaczaj_pikseli:
+
+	// tutaj po 67 cyklach od HSP
+
+	sts piksele_sram, piksele_reg ;2
+ 10a:	40 93 02 01 	sts	0x0102, r20
+	
+	// tutaj po 69 cyklach od HSP
+
+	nop ;1
+ 10e:	00 00       	nop
+	nop ;1
+ 110:	00 00       	nop
+	//nop ;1
+	//nop ;1
+	//nop ;1
+
+	sbic _SFR_IO_ADDR(VIDEO_REGISTER), BANK_SELECT_BIT ;1/3
+ 112:	f0 99       	sbic	0x1e, 0	; 30
+	sbi _SFR_IO_ADDR(CONTROL_PORT), BANK_SWITCH_PIN ;2
+ 114:	2a 9a       	sbi	0x05, 2	; 5
+	
+	sbi _SFR_IO_ADDR(SYNC_PORT), HSYNC_PIN ;2
+ 116:	58 9a       	sbi	0x0b, 0	; 11
+
+	// tutaj koñczy siê horizontal sync porch, trwa³ 76 cykli
+
+	// tutaj zaczyna siê horizontal back porch - 36 cykli
+
+	cpi piksele_reg, 1 ;1
+ 118:	41 30       	cpi	r20, 0x01	; 1
+	breq jest_obraz ;1/2
+ 11a:	09 f0       	breq	.+2      	; 0x11e <jest_obraz>
+	rjmp nie_ma_obrazu ;2
+ 11c:	07 c2       	rjmp	.+1038   	; 0x52c <nie_ma_obrazu>
+
+0000011e <jest_obraz>:
+
+jest_obraz:
+
+	in r16, DATA_PORT ;1
+ 11e:	02 b5       	in	r16, 0x22	; 34
+	push r16 ;2
+ 120:	0f 93       	push	r16
+	in r16, LOWER_ADDRESS_DDR ;1
+ 122:	0a b5       	in	r16, 0x2a	; 42
+	push r16 ;2
+ 124:	0f 93       	push	r16
+	in r16, LOWER_ADDRESS_PORT ;1
+ 126:	0b b5       	in	r16, 0x2b	; 43
+	push r16 ;2
+ 128:	0f 93       	push	r16
+	//in r16, HIGHER_ADDRESS_DDR ;1
+	//push r16 ;2
+	in r16, HIGHER_ADDRESS_PORT ;1
+ 12a:	08 b5       	in	r16, 0x28	; 40
+	push r16 ;2
+ 12c:	0f 93       	push	r16
+	in r16, CONTROL_PORT ;1
+ 12e:	05 b5       	in	r16, 0x25	; 37
+	push r16 ;2
+ 130:	0f 93       	push	r16
+
+	// tutaj po 18 cyklach od pocz¹tku HBP
+
+	andi r16, ~(1<<PERIPHERAL_ENABLE_PIN | 1<<READ_ENABLE_PIN) ;1
+ 132:	0f 7a       	andi	r16, 0xAF	; 175
+	ori r16, (1<<HSYNC_PIN | 1<<VSYNC_PIN | 1<<WRITE_ENABLE_PIN) ;1
+ 134:	0b 60       	ori	r16, 0x0B	; 11
+	out CONTROL_PORT, r16 ;1
+ 136:	05 bd       	out	0x25, r16	; 37
+	
+	//cbi _SFR_IO_ADDR(CONTROL_PORT), PERIPHERAL_ENABLE_PIN ;2
+
+	clr r16 ;1
+ 138:	00 27       	eor	r16, r16
+	out DATA_PORT, r16 ;1
+ 13a:	02 bd       	out	0x22, r16	; 34
+	out DATA_DDR, r16 ;1 
+ 13c:	01 bd       	out	0x21, r16	; 33
+	ldi r16, 0xFF ;1
+ 13e:	0f ef       	ldi	r16, 0xFF	; 255
+	out LOWER_ADDRESS_DDR, r16 ;1
+ 140:	0a bd       	out	0x2a, r16	; 42
+	out HIGHER_ADDRESS_DDR, r16 ;1
+ 142:	07 bd       	out	0x27, r16	; 39
+
+	//sbi _SFR_IO_ADDR(CONTROL_PORT), READ_ENABLE_PIN ;2
+
+	// tutaj po 27 cyklach od HBP
+
+	mov r16, licznik_linii_reg_1 ;1
+ 144:	0c 2f       	mov	r16, r28
+	lsr r16 ;1
+ 146:	06 95       	lsr	r16
+	cpi licznik_linii_reg_2, 0x01 ;1
+ 148:	d1 30       	cpi	r29, 0x01	; 1
+	brne nie_dodawaj ;1/2
+ 14a:	09 f4       	brne	.+2      	; 0x14e <nie_dodawaj>
+	ori r16, 0b10000000 ;1
+ 14c:	00 68       	ori	r16, 0x80	; 128
+
+0000014e <nie_dodawaj>:
+nie_dodawaj:
+
+	out HIGHER_ADDRESS_PORT, r16 ;1
+ 14e:	08 bd       	out	0x28, r16	; 40
+	clr r16 ;1
+ 150:	00 27       	eor	r16, r16
+
+	cbi _SFR_IO_ADDR(CONTROL_PORT), BUFFER_ENABLE_PIN ;2
+ 152:	2d 98       	cbi	0x05, 5	; 5
+
+	// tutaj koñczy siê HBP - trwa³ 36 cykli
+
+	// tutaj zaczyna siê horizontal active line
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 154:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 156:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 158:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 15a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 15c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 15e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 160:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 162:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 164:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 166:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 168:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 16a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 16c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 16e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 170:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 172:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 174:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 176:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 178:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 17a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 17c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 17e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 180:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 182:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 184:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 186:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 188:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 18a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 18c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 18e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 190:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 192:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 194:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 196:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 198:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 19a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 19c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 19e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1a0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1a2:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1a4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1a6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1a8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1aa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1ac:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ae:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1b0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1b2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1b4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1b6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1b8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ba:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1bc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1be:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1c0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1c2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1c4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1c6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1c8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ca:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1cc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ce:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1d0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1d2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1d4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1d6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1d8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1da:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1dc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1de:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1e0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1e2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1e4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1e6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1e8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ea:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1ec:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1ee:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1f0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1f2:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1f4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1f6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1f8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1fa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 1fc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 1fe:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 200:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 202:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 204:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 206:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 208:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 20a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 20c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 20e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 210:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 212:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 214:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 216:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 218:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 21a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 21c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 21e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 220:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 222:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 224:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 226:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 228:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 22a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 22c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 22e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 230:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 232:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 234:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 236:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 238:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 23a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 23c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 23e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 240:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 242:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 244:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 246:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 248:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 24a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 24c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 24e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 250:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 252:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 254:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 256:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 258:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 25a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 25c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 25e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 260:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 262:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 264:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 266:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 268:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 26a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 26c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 26e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 270:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 272:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 274:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 276:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 278:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 27a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 27c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 27e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 280:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 282:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 284:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 286:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 288:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 28a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 28c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 28e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 290:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 292:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 294:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 296:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 298:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 29a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 29c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 29e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2a0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2a2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2a4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2a6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2a8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2aa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2ac:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ae:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2b0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2b2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2b4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2b6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2b8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ba:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2bc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2be:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2c0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2c2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2c4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2c6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2c8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ca:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2cc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ce:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2d0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2d2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2d4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2d6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2d8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2da:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2dc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2de:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2e0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2e2:	03 95       	inc	r16
+
+
+
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2e4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2e6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2e8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ea:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2ec:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2ee:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2f0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2f2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2f4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2f6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2f8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2fa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 2fc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 2fe:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 300:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 302:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 304:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 306:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 308:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 30a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 30c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 30e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 310:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 312:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 314:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 316:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 318:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 31a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 31c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 31e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 320:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 322:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 324:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 326:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 328:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 32a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 32c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 32e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 330:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 332:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 334:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 336:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 338:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 33a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 33c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 33e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 340:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 342:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 344:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 346:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 348:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 34a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 34c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 34e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 350:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 352:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 354:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 356:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 358:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 35a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 35c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 35e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 360:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 362:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 364:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 366:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 368:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 36a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 36c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 36e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 370:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 372:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 374:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 376:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 378:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 37a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 37c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 37e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 380:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 382:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 384:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 386:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 388:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 38a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 38c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 38e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 390:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 392:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 394:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 396:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 398:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 39a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 39c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 39e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3a0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3a2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3a4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3a6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3a8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3aa:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3ac:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ae:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3b0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3b2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3b4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3b6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3b8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ba:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3bc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3be:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3c0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3c2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3c4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3c6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3c8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ca:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3cc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ce:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3d0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3d2:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3d4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3d6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3d8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3da:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3dc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3de:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3e0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3e2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3e4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3e6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3e8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ea:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3ec:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3ee:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3f0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3f2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3f4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3f6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3f8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3fa:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 3fc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 3fe:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 400:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 402:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 404:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 406:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 408:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 40a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 40c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 40e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 410:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 412:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 414:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 416:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 418:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 41a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 41c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 41e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 420:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 422:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 424:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 426:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 428:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 42a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 42c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 42e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 430:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 432:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 434:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 436:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 438:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 43a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 43c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 43e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 440:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 442:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 444:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 446:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 448:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 44a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 44c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 44e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 450:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 452:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 454:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 456:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 458:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 45a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 45c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 45e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 460:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 462:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 464:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 466:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 468:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 46a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 46c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 46e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 470:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 472:	03 95       	inc	r16
+
+
+
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 474:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 476:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 478:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 47a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 47c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 47e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 480:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 482:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 484:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 486:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 488:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 48a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 48c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 48e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 490:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 492:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 494:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 496:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 498:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 49a:	03 95       	inc	r16
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 49c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 49e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4a0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4a2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4a4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4a6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4a8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4aa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4ac:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ae:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4b0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4b2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4b4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4b6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4b8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ba:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4bc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4be:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4c0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4c2:	03 95       	inc	r16
+
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4c4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4c6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4c8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ca:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4cc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ce:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4d0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4d2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4d4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4d6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4d8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4da:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4dc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4de:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4e0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4e2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4e4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4e6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4e8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ea:	03 95       	inc	r16
+
+
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4ec:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4ee:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4f0:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4f2:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4f4:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4f6:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4f8:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4fa:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 4fc:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 4fe:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 500:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 502:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 504:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 506:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 508:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 50a:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 50c:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 50e:	03 95       	inc	r16
+
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 510:	0b bd       	out	0x2b, r16	; 43
+	inc r16 ;1
+ 512:	03 95       	inc	r16
+	
+	//...
+
+	// 43 cykle
+
+	sbi _SFR_IO_ADDR(CONTROL_PORT), BUFFER_ENABLE_PIN ;2
+ 514:	2d 9a       	sbi	0x05, 5	; 5
+	sbi _SFR_IO_ADDR(CONTROL_PORT), READ_ENABLE_PIN ;2
+ 516:	2c 9a       	sbi	0x05, 4	; 5
+	
+
+	pop r16 ;2
+ 518:	0f 91       	pop	r16
+	out CONTROL_PORT, r16 ;1
+ 51a:	05 bd       	out	0x25, r16	; 37
+	pop r16 ;2
+ 51c:	0f 91       	pop	r16
+	out HIGHER_ADDRESS_PORT, r16 ;1
+ 51e:	08 bd       	out	0x28, r16	; 40
+	//pop r16 ;2
+	//out HIGHER_ADDRESS_DDR, r16 ;1
+	pop r16 ;2
+ 520:	0f 91       	pop	r16
+	out LOWER_ADDRESS_PORT, r16 ;1
+ 522:	0b bd       	out	0x2b, r16	; 43
+	pop r16 ;2
+ 524:	0f 91       	pop	r16
+	out LOWER_ADDRESS_DDR, r16 ;1
+ 526:	0a bd       	out	0x2a, r16	; 42
+	pop r16 ;2
+ 528:	0f 91       	pop	r16
+	out DATA_PORT, r16 ;1	
+ 52a:	02 bd       	out	0x22, r16	; 34
+
+0000052c <nie_ma_obrazu>:
+
+nie_ma_obrazu:
+
+	adiw licznik_linii_reg_1, 1 ;2
+ 52c:	21 96       	adiw	r28, 0x01	; 1
+	sts licznik_linii_sram_1, licznik_linii_reg_1 ;2
+ 52e:	c0 93 00 01 	sts	0x0100, r28
+	sts licznik_linii_sram_2, licznik_linii_reg_2 ;2
+ 532:	d0 93 01 01 	sts	0x0101, r29
+	pop piksele_reg ;2
+ 536:	4f 91       	pop	r20
+	pop licznik_linii_reg_2 ;2
+ 538:	df 91       	pop	r29
+	pop licznik_linii_reg_1 ;2
+ 53a:	cf 91       	pop	r28
+	pop r17 ;2
+ 53c:	1f 91       	pop	r17
+	pop r16 ;2
+ 53e:	0f 91       	pop	r16
+	out _SFR_IO_ADDR(SREG), r16 ;1
+ 540:	0f bf       	out	0x3f, r16	; 63
+	pop r16 ;2
+ 542:	0f 91       	pop	r16
+
+ 544:	18 95       	reti
+
+00000546 <main>:
+
+extern unsigned char sprite1[8][8];
+
+int main(void)
+{
+	initVideo();
+ 546:	0e 94 d0 02 	call	0x5a0	; 0x5a0 <initVideo>
+	initPorts();
+ 54a:	0e 94 c4 02 	call	0x588	; 0x588 <initPorts>
+	
+	sei();
+ 54e:	78 94       	sei
+	
+    while(1)
+    {
+         clearVRAM();
+ 550:	0e 94 c1 02 	call	0x582	; 0x582 <clearVRAM>
+ 554:	fd cf       	rjmp	.-6      	; 0x550 <main+0xa>
+
+00000556 <fillVRAM>:
+	fillVRAM(0x00);
+}
+
+void fillVRAM(unsigned char color)
+{
+	CONTROL_PORT &= ~(1<<PERIPHERAL_ENABLE_PIN);
+ 556:	2e 98       	cbi	0x05, 6	; 5
+	CONTROL_PORT |= (1<<BUFFER_ENABLE_PIN);
+ 558:	2d 9a       	sbi	0x05, 5	; 5
+	LOWER_ADDRESS_DDR = 0xFF;
+ 55a:	9f ef       	ldi	r25, 0xFF	; 255
+ 55c:	9a b9       	out	0x0a, r25	; 10
+	//LOWER_ADDRESS_PORT = 0x00;
+	HIGHER_ADDRESS_DDR = 0xFF;
+ 55e:	97 b9       	out	0x07, r25	; 7
+	//HIGHER_ADDRESS_PORT = 0x00;
+	DATA_DDR = 0xFF;
+ 560:	91 b9       	out	0x01, r25	; 1
+	DATA_PORT = color;
+ 562:	82 b9       	out	0x02, r24	; 2
+	
+	for(unsigned char i = 0; i < 240; i++)
+ 564:	80 e0       	ldi	r24, 0x00	; 0
+	{
+		HIGHER_ADDRESS_PORT = i;
+ 566:	88 b9       	out	0x08, r24	; 8
+		for(unsigned char j = 0; j < 240; j++)
+ 568:	90 e0       	ldi	r25, 0x00	; 0
+		{
+			LOWER_ADDRESS_PORT = j;
+ 56a:	9b b9       	out	0x0b, r25	; 11
+			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
+ 56c:	2b 98       	cbi	0x05, 3	; 5
+			nop();
+ 56e:	00 00       	nop
+			nop();
+ 570:	00 00       	nop
+			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
+ 572:	2b 9a       	sbi	0x05, 3	; 5
+	DATA_PORT = color;
+	
+	for(unsigned char i = 0; i < 240; i++)
+	{
+		HIGHER_ADDRESS_PORT = i;
+		for(unsigned char j = 0; j < 240; j++)
+ 574:	9f 5f       	subi	r25, 0xFF	; 255
+ 576:	90 3f       	cpi	r25, 0xF0	; 240
+ 578:	c1 f7       	brne	.-16     	; 0x56a <fillVRAM+0x14>
+	HIGHER_ADDRESS_DDR = 0xFF;
+	//HIGHER_ADDRESS_PORT = 0x00;
+	DATA_DDR = 0xFF;
+	DATA_PORT = color;
+	
+	for(unsigned char i = 0; i < 240; i++)
+ 57a:	8f 5f       	subi	r24, 0xFF	; 255
+ 57c:	80 3f       	cpi	r24, 0xF0	; 240
+ 57e:	99 f7       	brne	.-26     	; 0x566 <fillVRAM+0x10>
+			nop();
+			nop();
+			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
+		}
+	}
+}
+ 580:	08 95       	ret
+
+00000582 <clearVRAM>:
+#include "graphics.h"
+#include <avr/pgmspace.h>
+
+void clearVRAM(void)
+{
+	fillVRAM(0x00);
+ 582:	80 e0       	ldi	r24, 0x00	; 0
+ 584:	0c 94 ab 02 	jmp	0x556	; 0x556 <fillVRAM>
+
+00000588 <initPorts>:
+	}
+}
+
+void initPorts(void)
+{
+	LOWER_ADDRESS_DDR = 0x00;
+ 588:	1a b8       	out	0x0a, r1	; 10
+	LOWER_ADDRESS_PORT = 0xFF;
+ 58a:	8f ef       	ldi	r24, 0xFF	; 255
+ 58c:	8b b9       	out	0x0b, r24	; 11
+	HIGHER_ADDRESS_DDR = 0xFF;
+ 58e:	87 b9       	out	0x07, r24	; 7
+	HIGHER_ADDRESS_PORT = 0x00;
+ 590:	18 b8       	out	0x08, r1	; 8
+	DATA_DDR = 0x00;
+ 592:	11 b8       	out	0x01, r1	; 1
+	DATA_PORT = 0x00;
+ 594:	12 b8       	out	0x02, r1	; 2
+
+	CONTROL_DDR = 0xFF;
+ 596:	84 b9       	out	0x04, r24	; 4
+	CONTROL_PORT = (1<<HSYNC_PIN | 1<<VSYNC_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<BUFFER_ENABLE_PIN | 1<<WRITE_ENABLE_PIN | 1<<READ_ENABLE_PIN);
+ 598:	8b e7       	ldi	r24, 0x7B	; 123
+ 59a:	85 b9       	out	0x05, r24	; 5
+	
+	VIDEO_REGISTER &= ~(1<<BANK_SELECT_BIT);	
+ 59c:	f0 98       	cbi	0x1e, 0	; 30
+ 59e:	08 95       	ret
+
+000005a0 <initVideo>:
+}
+
+void initVideo(void)
+{
+	TCCR1A = 0;
+ 5a0:	10 92 80 00 	sts	0x0080, r1
+	TCCR1B = (1<<CS10) | (1<<WGM12);
+ 5a4:	89 e0       	ldi	r24, 0x09	; 9
+ 5a6:	80 93 81 00 	sts	0x0081, r24
+	OCR1AH = high(636);
+ 5aa:	82 e0       	ldi	r24, 0x02	; 2
+ 5ac:	80 93 89 00 	sts	0x0089, r24
+	OCR1AL = low(636);
+ 5b0:	9c e7       	ldi	r25, 0x7C	; 124
+ 5b2:	90 93 88 00 	sts	0x0088, r25
+	TIMSK1 = (1<<OCIE1A);
+ 5b6:	80 93 6f 00 	sts	0x006F, r24
+ 5ba:	08 95       	ret
+
+000005bc <_exit>:
+ 5bc:	f8 94       	cli
+
+000005be <__stop_program>:
+ 5be:	ff cf       	rjmp	.-2      	; 0x5be <__stop_program>
