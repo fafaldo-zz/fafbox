@@ -1,4 +1,4 @@
-graphics.d graphics.o: .././graphics.c .././defines.h \
+graphics.d graphics.o: .././graphics.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/inttypes.h \
@@ -10,11 +10,9 @@ graphics.d graphics.o: .././graphics.c .././defines.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/version.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/fuse.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/lock.h \
- .././graphics.h .././sprites.h .././tiles.h .././game_sprites.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/pgmspace.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/include/stddef.h
-
-.././defines.h:
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/include/stddef.h \
+ .././fafbox.h .././graphics.h .././sprites.h .././tiles.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/io.h:
 
@@ -38,14 +36,14 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/lock.h:
 
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/pgmspace.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/include/stddef.h:
+
+.././fafbox.h:
+
 .././graphics.h:
 
 .././sprites.h:
 
 .././tiles.h:
-
-.././game_sprites.h:
-
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/pgmspace.h:
-
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/include/stddef.h:

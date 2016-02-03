@@ -2,19 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-arkanoid_sprites.c
-
 controller.c
 
-fafbox1.c
+fafbox.c
 
-game_sprites.c
+main.c
 
 graphics.c
 
 graphics_interrupt.s
-
-pikachu.c
 
 snake_sprites.c
 

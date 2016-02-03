@@ -2,9 +2,6 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
 
-#include <avr/io.h>
-
-void initPorts(void);
 void initVideo(void);
 void clearVRAM(void);
 void fillVRAM(unsigned char);

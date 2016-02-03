@@ -3,7 +3,7 @@
 #define __SFR_OFFSET 0
 
 #include <avr/io.h>
-#include "defines.h"
+#include "fafbox.h"
 
 .extern licznik_linii_sram_1
 .extern licznik_linii_sram_2
@@ -146,20 +146,32 @@ nie_wylaczaj_pikseli:
 jest_obraz:
 
 
+	; DATA_DDR jest zawsze wyjsciem wiec nie ma sensu zapisywac
+	; DATA_PORT mogl miec dowolna wartosc, bo moglismy akurat cos zapisywac do RAMu
 	in r16, DATA_PORT ;1
 	push r16 ;2
+	; LOWER_ADDRESS_PORT mogl miec dowolna wartosc bo moglismy akurat zapisywac cos do RAMu
 	in r16, LOWER_ADDRESS_PORT ;1
 	push r16 ;2
+	; LOWER_ADDRESS_DDR mogl miec dowolna wartosc, bo mogl byc w trakcie zapisywania do RAMu lub odczytu wejsc
 	in r16, LOWER_ADDRESS_DDR ;1
 	push r16 ;2
+	; HIGHER_ADDRESS_DDR jest zawsze wyjsciem, nie ma sensu zapisywac
+	; HIGHER_ADDRESS_PORT mogl miec dowolna wartosc j.w.
 	in r16, HIGHER_ADDRESS_PORT ;1
 	push r16 ;2
+	; CONTROL_PORT_DDR jest zawsze wyjsciem
+	; CONTROL_PORT mogl miec dowolna wartosc, bo moglismy akurat cos zapisywac do RAMu uzywajac WRITE_ENABLE_PIN lub READ_ENABLE_PIN wiec zapisujemy
 	in r16, CONTROL_PORT ;1
 	push r16 ;2
 
 
+	; ustawiamy caly CONTROL_PORT na 1
 	ori r16, (1<<HSYNC_PIN | 1<<VSYNC_PIN | 1<<WRITE_ENABLE_PIN | 1<<READ_ENABLE_PIN | 1<<BUFFER_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<BANK_SWITCH_PIN) ;1
 
+	; jesli aktualny BANK jest ustawiony na 0 (ten do którego akutalnie wpisujemy nowe dane) to pomijamy i rysujemy z banku 1
+	; jesli aktualny bank do ktorego piszemy jest 1, to rysujemy z banku 0
+	; wpis w VIDEO_REGISTER jest zmieniany po kazdym zakonczeniu wpisywania ramki i oznacza gdzie aktualnie WPISUJEMY dane (RYSUJEMY dane zawsze z przeciwnego).
 	sbic VIDEO_REGISTER, BANK_SELECT_BIT ;1/2 
 	andi r16, ~(1<<BANK_SWITCH_PIN) ;1
 
@@ -684,11 +696,11 @@ nie_dodawaj:
 	
 	
 
-
 	sbi CONTROL_PORT, BUFFER_ENABLE_PIN ;2
 	sbi CONTROL_PORT, READ_ENABLE_PIN ;2
 	
 
+	; odnawiamy wszystkie zmienione porty
 	pop r16 ;2
 	out CONTROL_PORT, r16 ;1
 	pop r16 ;2
@@ -699,6 +711,7 @@ nie_dodawaj:
 	out LOWER_ADDRESS_PORT, r16 ;1
 	pop r16 ;2
 	out DATA_PORT, r16 ;1	
+	; ustawiamy data jako wyjscie (nie wiem po co skoro zawsze jest wyjsciem ale nei usuwam skoro dziala)
 	ldi r16, 0xFF
 	out DATA_DDR, r16
 	
@@ -715,4 +728,4 @@ nie_ma_obrazu:
 	out SREG, r16 ;1
 	pop r16 ;2
 
-	reti ;5
+	reti ;

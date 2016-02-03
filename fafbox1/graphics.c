@@ -1,14 +1,11 @@
 
 
-
-#include "defines.h"
 #include <avr/io.h>
+#include <avr/pgmspace.h>
+#include "fafbox.h"
 #include "graphics.h"
 #include "sprites.h"
 #include "tiles.h"
-#include "game_sprites.h"
-#include <avr/pgmspace.h>
-
 
 
 short tile_table[15][30];
@@ -24,6 +21,8 @@ void clearVRAM(void)
 
 void fillVRAM(unsigned char color)
 {
+	// przed zapisaniem do ramu zerujemy write i read enable, zerujemy buffer_enable (bo zapisujemy a nie rysujemy) i peripheral (bo korzystamy z lower adresu)
+	// wlasciwie to ustawiamy na high bo tak zerujemy
 	CONTROL_PORT |= (1<<READ_ENABLE_PIN | 1<<WRITE_ENABLE_PIN | 1<<BUFFER_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN);
 	LOWER_ADDRESS_DDR = 0xFF;
 	DATA_PORT = color;
@@ -37,6 +36,7 @@ void fillVRAM(unsigned char color)
 			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
 		}
 	}
+	// potem lower z powrotem jako wejscie i otwieramy bufor peripheral
 	LOWER_ADDRESS_DDR = 0x00;
 	LOWER_ADDRESS_PORT = 0xFF;
 	CONTROL_PORT &= ~(1<<PERIPHERAL_ENABLE_PIN);
@@ -63,23 +63,6 @@ void drawPalette()
 	LOWER_ADDRESS_DDR = 0x00;
 	LOWER_ADDRESS_PORT = 0xFF;
 	CONTROL_PORT &= ~(1<<PERIPHERAL_ENABLE_PIN);
-}
-
-void initPorts(void)
-{
-	
-	
-	LOWER_ADDRESS_DDR = 0x00;
-	LOWER_ADDRESS_PORT = 0xFF;
-	HIGHER_ADDRESS_DDR = 0xFF;
-	HIGHER_ADDRESS_PORT = 0x00;
-	DATA_DDR = 0xFF;
-	DATA_PORT = 0x00;
-
-	CONTROL_DDR = 0xFF;
-	CONTROL_PORT = (1<<HSYNC_PIN | 1<<VSYNC_PIN | 1<<BUFFER_ENABLE_PIN | 1<<WRITE_ENABLE_PIN | 1<<READ_ENABLE_PIN);
-	
-	VIDEO_REGISTER |= (1<<BANK_SELECT_BIT);
 }
 
 void initVideo(void)
@@ -197,6 +180,8 @@ void drawBackground(void)
 // swap video buffers
 void endFrame(void)
 {
+	// jesli pisalismy do 1 to zerujemy na 0 i ustawiamy CONTROL_PORT (wykorzystywany przy rysowaniu) na 1 
+	// tak naprade chyba nie musimy tego robic bo w przerwaniu i tak to robimy ale nie usuwam
 	if(VIDEO_REGISTER & (1<<BANK_SELECT_BIT))
 	{
 		 VIDEO_REGISTER &= ~(1<<BANK_SELECT_BIT);

@@ -95,28 +95,19 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="arkanoid_sprites.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="arkanoid_sprites.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="controller.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="controller.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="defines.h">
+    <Compile Include="fafbox.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="fafbox1.c">
+    <Compile Include="fafbox.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="game_sprites.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="game_sprites.h">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="graphics.c">
@@ -126,9 +117,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="graphics_interrupt.s">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="pikachu.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="snake_sprites.c">
