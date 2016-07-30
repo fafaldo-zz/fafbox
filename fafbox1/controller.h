@@ -1,16 +1,19 @@
+#ifndef __CONTROLLER_H__
+#define __CONTROLLER_H__
 
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
 
-#define BUTTON_A PA0
-#define BUTTON_B PA1
-#define BUTTON_C PA2
-#define BUTTON_D PA3
-#define CONTROLLER_PORT PORTA
-#define CONTROLLER_DDR DDRA
-#define CONTROLLER_PIN PINA
+#include "fafbox.h"
 
-unsigned char ButtonPushed(unsigned char);
+#define BTN_A_1 BUTTON_A_PIN
+#define BTN_B_1 BUTTON_B_PIN
+#define BTN_LEFT_1 BUTTON_C_PIN
+#define BTN_RIGHT_1 BUTTON_D_PIN 
+#define BTN_A_2 BUTTON_E_PIN
+#define BTN_B_2 BUTTON_F_PIN
+#define BTN_LEFT_2 BUTTON_G_PIN
+#define BTN_RIGHT_2 BUTTON_H_PIN 
+
+uint8_t isButtonPushed(uint8_t);
 
 
 #endif

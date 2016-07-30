@@ -1,6 +1,6 @@
-
 #include <avr/io.h>
 #include "sound.h"
+
 
 /*
     Code responsible for playing sounds. It uses Timer0 available in Atmega644 to generate a PWM signal to drive our connected buzzer.

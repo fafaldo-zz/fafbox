@@ -1,34 +1,39 @@
 
-#ifndef GRAPHICS_H_
-#define GRAPHICS_H_
+#ifndef __GRAPHICS_H__
+#define __GRAPHICS_H__
 
-void initVideo(void);
-void clearVRAM(void);
-void fillVRAM(unsigned char);
-void drawPalette(void);
-void drawSpriteFromFlash(short,unsigned char,unsigned char);
-void drawTileFromFlash(short,unsigned char,unsigned char);
-void endFrame(void);
-void drawBackground(void);
-void moveSprite1(unsigned char, unsigned char);
-void moveSprite2(unsigned char, unsigned char);
-void moveSprite3(unsigned char, unsigned char);
-void waitForVBlank(void);
-void setTile(short,unsigned char, unsigned char);
 
-void setSprite(unsigned char id, short address, unsigned char x, unsigned char y);
-void moveSprite(unsigned char, unsigned char, unsigned char);
+volatile uint8_t faf_lineCounterHigh;
+volatile uint8_t faf_lineCounterLow;
 
-void drawCustomSpriteFromFlash(short address,unsigned char width, unsigned char height, unsigned char x, unsigned char y);
 
-typedef struct
-{
-	short data;
-	unsigned char x, y;
-}SPRITE;
+void initVideo();
+void clearVRAM();
+void fillVRAM(uint8_t buffer, uint8_t color);
+void drawPalette();
+void drawSpriteFromFlash(uint16_t, uint8_t, uint8_t);
+void drawTileFromFlash(uint16_t, uint8_t, uint8_t);
+void endFrame();
+void drawBackground();
+void moveSprite1(uint8_t, uint8_t);
+void moveSprite2(uint8_t, uint8_t);
+void moveSprite3(uint8_t, uint8_t);
+void waitForVBlank();
+void setTile(uint16_t, uint8_t, uint8_t);
 
-SPRITE getSprite(unsigned char);
+void setSprite(uint8_t, uint16_t, uint8_t, uint8_t);
+void moveSprite(uint8_t, uint8_t, uint8_t);
+
+void drawCustomSpriteFromFlash(uint16_t, uint8_t, uint8_t, uint8_t, uint8_t);
+
+typedef struct {
+	uint16_t data;
+	uint8_t x, y;
+} SPRITE;
+
+SPRITE getSprite(uint8_t);
 
 #define TRANSPARENT_COLOR 0x00
+
 
 #endif

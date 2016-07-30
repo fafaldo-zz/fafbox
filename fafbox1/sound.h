@@ -1,6 +1,6 @@
-
 #ifndef __SOUND_H__
 #define __SOUND_H__
+
 
 #define MAX_NOTES_COUNT 100
 
@@ -38,5 +38,6 @@ void playSound(uint8_t notes[], uint8_t loop);
 #define NOTE_A4_VAL 44
 #define NOTE_A#4_VAL 40
 #define NOTE_B4_VAL 49
+
 
 #endif
