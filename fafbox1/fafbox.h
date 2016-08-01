@@ -13,6 +13,11 @@
 #define GSR_VBLANK_BIT 3 					//used to indicate that frame has just finished; if used by main code, should be cleared after usage
 
 /*
+	General purpose register used to store inputs from peripherals
+*/
+#define CONTROLLER_STATUS_REGISTER GPIOR1
+
+/*
 	Main ports used by microcontroller
 */
 #define LOWER_ADDRESS_PORT PORTA
@@ -25,11 +30,12 @@
 #define CONTROL_DDR DDRB
 #define HSYNC_PIN 0
 #define VSYNC_PIN 1
-#define WRITE_ENABLE_PIN 2
-#define READ_ENABLE_PIN 3
-#define VIDEO_ENABLE_PIN 4
-#define BANK_SWITCH_PIN 5
-#define PERIPHERAL_ENABLE_PIN 6
+#define WRITE_READ_ENABLE_PIN 2 //1 - write enable (read driven high), 0 - read enable (write driven high)
+#define BANK_SWITCH_PIN 3
+#define OUTPUT_ENABLE_PIN 4
+#define PERIPHERAL_ENABLE_PIN 5
+#define SOUND_PIN 6
+#define NETWORK_ENABLE_PIN 7
 
 /*
 	Ports used for SD card communication

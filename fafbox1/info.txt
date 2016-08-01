@@ -1,0 +1,22 @@
+1. vsync (nie do ruszenia)
+2. hsync (nie do ruszenia, chyba że będziemy mieli jeden pin który globalnie nam obetnie wszystkie wyjścia wielorazowego użytku podczas wejścia do przerwania i wykonania wszystkiego co chcemy - może to jest klucz do sukcesu)
+3. sound (nie do ruszenia, chyba że internet == no sound)
+4. bank switch pin (zanim zaczniemy rysować można go użyć to innych celów, ale musimy wtedy zablokować odczyt/zapis, ale możemy robić odczyty wtedy kiedy nie rysujemy, ale to zabiera cykle procesora, więc lepiej normalnie chyba)
+5. read/write enable (odpada video enable bo to samo robimy tylko na read, więc video enable = read)
+6. output enable
+7. -
+8. -
+
+jakby był jeden bank, do którego są podłączone SD i ENC = 3 piny + 2 chip select = 5
+
+np. włączenie READ powoduje otworzenie bufora SD/ENC, akceptujemy OUTPUT, wtedy nie musimy mieć bank switch pin (dopóki nie zrobimy output to możemy go zmieniać dowolnie np. po SD, a jak zrobimy output 
+
+jeden specjalny bit który wszystko otwiera - otwiera bufory na kartę SD, otwiera bufor do Peripherala, wtedy możemy użyć:
+1. vsync - zawsze niezmienne, bo może trwać synchronizacja pionowa i nie mamy na to żadnego wpływu ani nie możemy tego zakłócać
+2. mosi (read/write, normalnie karta zamknięta - ustawiamy read/write, karta otwarta - nie przeprowadzamy żadnych zapisów i odczytów (bo musielibyśmy użyć output, więc zmiana wartości nam nie zagraża)
+3. miso (bank switch, normalnie karta zamknięta - ustawiamy bank jako część adresu, karta otwarta, zmiana adresu nam nie zagraża bo nic nie odczytujemy/zapisujemy w tym czasie, właściwie to wtedy jest input więc nic nie psuje, chyba że pamięć RAM się pogniewa jak podłączymy do niej pin na outpucie podłączony do pull-up'a)
+4. sck (hsync, jeśli odcięte to kontroluje HSYNC, który jest otwierany jeśli to nie jest wybrane, jeśli jest wybrane to połączone z SCK i HSYNC odcięty)
+5. other enable (właśnie ten pin blokujący kartę)
+6. sound - zawsze niezmienne bo możemy coś grać
+7. ENC chip select (output enable, jeśli odcięte to output enable, a jeśli podłączone do chip select, ale blokujemy tranzystorem output enable - może już bardziej nie komplikować?)
+8. output enable

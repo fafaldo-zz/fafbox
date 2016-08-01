@@ -16,6 +16,7 @@ void initSound(uint8_t noteDurationDivider) {
     faf_noteDurationDivider = noteDurationDivider; //add some assertions
     
     //do initialization of timers and port here, do not turn on timer as it will automatically start playing sound from buzzer
+    TIMSK2 = 0;
 }
 
 void playSound(uint8_t* notes, uint8_t size) {
@@ -25,11 +26,13 @@ void playSound(uint8_t* notes, uint8_t size) {
     
     //save current note buffer
     faf_notes = notes;
+    faf_notesCount = size;
     
+    TCCR2A = (1<<COM2B1 | 1<<WGM21 | 1<<WGM20);
+    TCCR2B = (1<<WGM22 | 1<<CS22 | 1<<CS21 | 1<<CS20);
+
     //start playing
     faf_isPlaying = 1;
-    
-    //TODO start timer here
 }
 
 void stopSound() {
