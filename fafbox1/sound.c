@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include "fafbox.h"
 #include "sound.h"
 
 
@@ -17,6 +18,7 @@ void initSound(uint8_t noteDurationDivider) {
     
     //do initialization of timers and port here, do not turn on timer as it will automatically start playing sound from buzzer
     TIMSK2 = 0;
+    GENERAL_STATUS_REGISTER &= ~(1<<IS_PLAYING_BIT);
 }
 
 void playSound(uint8_t* notes, uint8_t size) {
@@ -32,12 +34,13 @@ void playSound(uint8_t* notes, uint8_t size) {
     TCCR2B = (1<<WGM22 | 1<<CS22 | 1<<CS21 | 1<<CS20);
 
     //start playing
-    faf_isPlaying = 1;
+    GENERAL_STATUS_REGISTER |= (1<<IS_PLAYING_BIT);
 }
 
 void stopSound() {
     //stop playing
-    faf_isPlaying = 0;
+    GENERAL_STATUS_REGISTER &= ~(1<<IS_PLAYING_BIT);
     
-    //TODO stop timer here
+    TCCR2A = 0;
+    TCCR2B = 0;
 }

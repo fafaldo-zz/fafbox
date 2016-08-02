@@ -6,11 +6,12 @@
 /*
 	General purpose register used for communication between interrupt handling routine and main code. It is also used internally inside that routine itself.
 */
-#define GRAPHICS_STATUS_REGISTER GPIOR0
+#define GENERAL_STATUS_REGISTER GPIOR0
 #define GSR_ACTIVE_PIXELS_BIT 0 			//used internally by interrupt, to decide whether this is an active frame and we should write some pixels to the screen
 #define GSR_CURRENT_BANK_BIT 1 				//used to indicate bank in use by interrupt; is saved before/after each frame (see: graphics.c)
-#define GSR_NEW_BANK_BIT 2				//used to let know our interrupt routine that bank needs to be changed
+#define GSR_NEW_BANK_BIT 2					//used to let know our interrupt routine that bank needs to be changed
 #define GSR_VBLANK_BIT 3 					//used to indicate that frame has just finished; if used by main code, should be cleared after usage
+#define GSR_IS_PLAYING_BIT 4				//used to indicate if sound is playing
 
 /*
 	General purpose register used to store inputs from peripherals

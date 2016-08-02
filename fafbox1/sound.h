@@ -10,7 +10,6 @@ volatile uint8_t faf_currentNoteFrame = 0;
 volatile uint8_t faf_currentNote = 0;
 volatile uint8_t* faf_notes;
 volatile uint8_t faf_notesCount = 0;
-volatile uint8_t faf_isPlaying = 0;
 
 void initSound();
 void playSound(uint8_t notes[], uint8_t loop);
