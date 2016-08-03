@@ -31,6 +31,15 @@
 	Vertical video - 480
 */
 
+/*
+	General logic behind this interrupt:
+
+	1. Push status register
+	2. Equalize interrupt latency
+	3. Turn HSYNC on
+	4. Store all required registers
+*/
+
 .global TIMER1_COMPA_vect
 TIMER1_COMPA_vect:
 
@@ -350,7 +359,12 @@ sound_updated:
 
 	//59 cycles (1) (3) (4) (5) (6) (7)
 
-	//69 cycles from beginning of HSP
+	//update sound to 100% (50% duty cycle)
+	lds r16, _SFR_MEM_ADDR(OCR2A) ;2
+	lsr r16 ;1
+	sts _SFR_MEM_ADDR(OCR2B), r16 ;2
+
+	//74 cycles from beginning of HSP
 
 	sbiw LINE_COUNTER_REGISTER_LOW, 2 ;2
 	brcs turn_vsync_on ;1/2
@@ -366,7 +380,7 @@ turn_vsync_on:
 skip_turn_vsync_on:
 	adiw LINE_COUNTER_REGISTER_LOW, 2 ;2
 
-	//79 cycles from beginning of HSP
+	//84 cycles from beginning of HSP
 
 	ldi r17, high(35) ;1
 	cpi LINE_COUNTER_REGISTER_LOW, low(35) ;1
@@ -380,7 +394,19 @@ turn_pixels_on:
 
 skip_turn_pixels_on:
 	
-	//86 cycles from beginning of HSP
+	//91 cycles from beginning of HSP
+
+	nop ;1
+	nop ;1
+	nop ;1
+	nop ;1
+	nop ;1
+
+	//96 cycles from beginning of HSP
+
+	//horizontal back porch - 48 cycles
+
+	sbi _SFR_IO_ADDR(CONTROL_PORT), HSYNC_PIN ;2
 
 	ldi r17, high(415) ;1
 	cpi LINE_COUNTER_REGISTER_LOW, low(415) ;1
@@ -397,13 +423,7 @@ turn_pixels_off:
 
 skip_turn_pixels_off:
 
-	nop ;1
-
-	//96 cycles from beginning of HSP
-
-	//horizontal back porch - 48 cycles
-
-	sbi _SFR_IO_ADDR(CONTROL_PORT), HSYNC_PIN ;2
+	//11 cycles from beginning of HBP
 
 	ldi r17, high(424) ;1
 	cpi LINE_COUNTER_REGISTER_LOW, low(424) ;1
@@ -425,7 +445,7 @@ clear_line_counter:
 
 skip_clear_line_counter:
 
-	//11 cycles from beginning of HBP
+	//22 cycles from beginning of HBP
 
 
 	//STORE VALUES
@@ -450,7 +470,7 @@ skip_clear_line_counter:
 	in r16, _SFR_IO_ADDR(DATA_PORT) ;1
 	push r16 ;2
 
-	//23 cycles from beginning of HBP
+	//34 cycles from beginning of HBP
 
 
 	//SET VALUES
@@ -462,7 +482,7 @@ skip_clear_line_counter:
 	//we do not touch HSYNC_PIN
 	//we do not touch VSYNC_PIN
 	//we set PERIPHERAL_ENABLE_PIN to disable for now (we will turn it on after we set all ports as input), it should be turned off anyway but whatever
-	//we do not touch SOUND_PIN
+	//we do not touch SOUND_PIN - pushing and poping sound bit should not override sound pin behavior
 	//we deselect NETWORK_ENABLE_PIN, it should be turned off anyway but whatever
 	ori r17, (1<<BANK_SWITCH_PIN | 1<<WRITE_READ_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN) ;1
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
@@ -473,10 +493,10 @@ skip_clear_line_counter:
 	ldi r17, 0xFF ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r17 ;1
 
-	//set port as output with all ones for now, before we open sd buffer; no need to change DDR
+	//set port as output with all ones for now, before we open sd buffer, not to select CS line by mistake; no need to change DDR
 	out _SFR_IO_ADDR(HIGHER_ADDRESS_PORT), r17 ;1
 
-	
+	//TODO global register for control port might improve speed (saves instruction cycles)
 
 	//now we enable all peripherals
 	in r17, _SFR_IO_ADDR(CONTROL_PORT) ;1
@@ -489,20 +509,20 @@ skip_clear_line_counter:
 	in r16, CONTROLLER_PIN ;1
 	out _SFR_IO_ADDR(CONTROLLER_STATUS_REGISTER), r16 ;1
 
-	
 
 	sbis _SFR_IO_ADDR(CONTROL_PORT), GSR_ACTIVE_PIXELS_BIT ;1/2
 	rjmp no_video ;2
 
 video:	
 
-	//38 cycles from beginning of HBP
+	//48 cycles from beginning of HBP
+
+	//horizontal active pixels - 640 cycles -> 640 cycles - 512 for activepixels = 128 free pixels / 2 = 64 pixels on each side to make sure video is centered - dont care for now
 
 	//now we disable all peripherals
 	ori r17, (1<<PERIPHERAL_ENABLE_PIN) ;1
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
 
-	//do not change data port for now
 	//no need to chage higher address
 
 	//now we turn lower back to being output
@@ -513,13 +533,10 @@ video:
 	//set port as floating input, to protect from short-circuit when we do reading
 	ldi r16, 0 ;1
 	out _SFR_IO_ADDR(DATA_DDR), r16 ;1
-	out _SFR_IO_ADDR(DATA_PORT), r16 ;1
 
-	//46 cycles from beginning of HBP
-	//horizontal active pixels - 640 cycles
+	//7 cycles from beginning of HAP
 
-	//we copy new_bank_bit to current_bank_bit at the beginning of each frame, then we test this value to determine
-	//if we should use bank 0 or 1 
+	//we copied new bank at the beginning of the new frame, now we test its value and if its 0 then clear it
 	sbic _SFR_IO_ADDR(GENERAL_STATUS_REGISTER), GSR_CURRENT_BANK_BIT ;1/2 
 	andi r17, ~(1<<BANK_SWITCH_PIN) ;1
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
@@ -585,7 +602,9 @@ highest_bit_not_set:
 
 no_video:
 
-	//38 cycles from beginning of HBP
+	//48 cycles from beginning of HBP
+
+	//horizontal active pixels - 640 cycles
 	
 	//do some reading and writing to SPI here
 

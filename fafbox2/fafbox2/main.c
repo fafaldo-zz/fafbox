@@ -16,6 +16,8 @@ int main(void) {
 	initVideo();
 	sei();
 
+	clearVRAM();
+
     while (1) {
     }
 }
