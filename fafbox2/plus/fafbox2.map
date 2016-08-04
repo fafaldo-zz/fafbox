@@ -256,7 +256,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x38c
+.text           0x00000000      0x374
  *(.vectors)
  .vectors       0x00000000       0x7c D:/programy/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.106/gcc/dev/atmega644pa/avr5/crtatmega644pa.o
                 0x00000000                __vector_default
@@ -349,13 +349,13 @@ END GROUP
                 0x000000ba                __vector_13
                 0x0000034a                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x0000034a       0x3e main.o
+ .text.main     0x0000034a       0x26 main.o
                 0x0000034a                main
-                0x00000388                . = ALIGN (0x2)
+                0x00000370                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000388        0x0 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000388                _exit
-                0x00000388                exit
+ .fini9         0x00000370        0x0 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000370                _exit
+                0x00000370                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -374,11 +374,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000388        0x4 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000370        0x4 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000038c                _etext = .
+                0x00000374                _etext = .
 
-.data           0x00800100        0x2 load address 0x0000038c
+.data           0x00800100        0x2 load address 0x00000374
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -414,8 +414,8 @@ END GROUP
  COMMON         0x0080048b        0x2 sound.o
                 0x0080048b                faf_notes
                 0x0080048d                PROVIDE (__bss_end, .)
-                0x0000038c                __data_load_start = LOADADDR (.data)
-                0x0000038e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000374                __data_load_start = LOADADDR (.data)
+                0x00000376                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080048d        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -502,26 +502,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x4f3
+.debug_info     0x00000000      0x47b
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x237 graphics.o
  .debug_info    0x00000237       0x66 graphics_interrupt.o
- .debug_info    0x0000029d      0x10a main.o
- .debug_info    0x000003a7      0x14c sound.o
+ .debug_info    0x0000029d       0x92 main.o
+ .debug_info    0x0000032f      0x14c sound.o
 
-.debug_abbrev   0x00000000      0x2bf
+.debug_abbrev   0x00000000      0x25f
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x141 graphics.o
  .debug_abbrev  0x00000141       0x14 graphics_interrupt.o
- .debug_abbrev  0x00000155       0xc2 main.o
- .debug_abbrev  0x00000217       0xa8 sound.o
+ .debug_abbrev  0x00000155       0x62 main.o
+ .debug_abbrev  0x000001b7       0xa8 sound.o
 
-.debug_line     0x00000000      0xbbd
+.debug_line     0x00000000      0xb56
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1d3 graphics.o
  .debug_line    0x000001d3      0x78b graphics_interrupt.o
- .debug_line    0x0000095e      0x155 main.o
- .debug_line    0x00000ab3      0x10a sound.o
+ .debug_line    0x0000095e       0xee main.o
+ .debug_line    0x00000a4c      0x10a sound.o
 
 .debug_frame    0x00000000       0xbc
  *(.debug_frame)
@@ -529,13 +529,13 @@ END GROUP
  .debug_frame   0x00000054       0x24 main.o
  .debug_frame   0x00000078       0x44 sound.o
 
-.debug_str      0x00000000      0x2a5
+.debug_str      0x00000000      0x25a
  *(.debug_str)
  .debug_str     0x00000000      0x1c3 graphics.o
                                 0x1f7 (size before relaxing)
- .debug_str     0x000001c3       0x5c main.o
-                                0x19a (size before relaxing)
- .debug_str     0x0000021f       0x86 sound.o
+ .debug_str     0x000001c3       0x11 main.o
+                                0x14f (size before relaxing)
+ .debug_str     0x000001d4       0x86 sound.o
                                 0x1de (size before relaxing)
 
 .debug_loc      0x00000000       0xb3
