@@ -71,6 +71,7 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 		for(uint8_t j = 0; j < 256; j++) {
 			LOWER_ADDRESS_PORT = j;
 			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			nop();
 			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
 		}
 	}
@@ -106,11 +107,13 @@ void drawPalette() {
 			CONTROL_PORT &= ~(1<<BANK_SWITCH_PIN);
 
 			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			nop();
 			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
 
 			CONTROL_PORT |= (1<<BANK_SWITCH_PIN);	
 
 			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			nop();
 			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
 		}
 	}

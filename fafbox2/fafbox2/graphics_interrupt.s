@@ -408,8 +408,8 @@ skip_turn_pixels_on:
 
 	sbi _SFR_IO_ADDR(CONTROL_PORT), HSYNC_PIN ;2
 
-	ldi r17, high(415) ;1
-	cpi LINE_COUNTER_REGISTER_LOW, low(415) ;1
+	ldi r17, high(515) ;1
+	cpi LINE_COUNTER_REGISTER_LOW, low(515) ;1
 	cpc r17, LINE_COUNTER_REGISTER_HIGH ;1
 	breq turn_pixels_off ;1/2
 	nop ;1
@@ -425,8 +425,8 @@ skip_turn_pixels_off:
 
 	//11 cycles from beginning of HBP
 
-	ldi r17, high(424) ;1
-	cpi LINE_COUNTER_REGISTER_LOW, low(424) ;1
+	ldi r17, high(524) ;1
+	cpi LINE_COUNTER_REGISTER_LOW, low(524) ;1
 	cpc r17, LINE_COUNTER_REGISTER_HIGH ;1
 	breq clear_line_counter ;1/2
 	nop ;1
