@@ -1,6 +1,8 @@
 
+#define F_CPU 25175000
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include <util/delay.h>
 #include "fafbox.h"
 #include "graphics.h"
 
@@ -34,8 +36,8 @@ uint8_t faf_usedSprites = 0;
 void initVideo() {
 	TCCR1A = 0;
 	TCCR1B = (1<<CS10) | (1<<WGM12);
-	OCR1AH = high(800);
-	OCR1AL = low(800);
+	OCR1AH = high(799);
+	OCR1AL = low(799);
 	TIMSK1 = (1<<OCIE1A);
 }
 
@@ -57,7 +59,11 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 	//port by disabling buffer (PERIPHERAL_ENABLE_PIN). These chips pins are inverted, so driving our pin high actually disables component
 	CONTROL_PORT |= (1<<WRITE_READ_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
 
-	DATA_PORT = color;
+	_delay_ms(2000);
+
+	DATA_PORT = 0b11100000;
+	
+	_delay_ms(2000);
 
 	if(buffer == 0) {
 		CONTROL_PORT &= ~(1<<BANK_SWITCH_PIN);
@@ -65,16 +71,25 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 		CONTROL_PORT |= (1<<BANK_SWITCH_PIN);
 	}
 
-	for(uint8_t i = 0; i < 240; i++) {
+	for(uint16_t i = 0; i < 0; i++) {
 		HIGHER_ADDRESS_PORT = i;
 		
-		for(uint8_t j = 0; j < 256; j++) {
+		for(uint16_t j = 0; j < 0; j++) {
 			LOWER_ADDRESS_PORT = j;
 			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			nop();
+			nop();
+			nop();
 			nop();
 			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
 		}
 	}
+	
+	_delay_ms(2000);
+	
+	//CONTROL_PORT &= ~(1<<WRITE_READ_ENABLE_PIN);
+	
+	//DATA_PORT = 0b00000011;
 
 	//TODO no need to tidy-up? Can we leave LOWER as outputs?
 	//we set lower address back to being input with pull-up resistors

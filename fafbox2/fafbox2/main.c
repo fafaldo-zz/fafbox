@@ -4,7 +4,7 @@
  * Created: 02-08-2016 18:49:41
  * Author : fafik
  */ 
-#define F_CPU 20000000
+#define F_CPU 25175000
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -15,7 +15,6 @@ volatile uint8_t oneTime = 0;
 
 #define WRRD 2
 #define OT 4
-#define BE 5
 
 int main(void) {
 	/*
@@ -25,21 +24,46 @@ int main(void) {
 	
 	//addresses
 	DDRB = 0xFF;
-	DDRB = 0x00;
+	PORTB = 0x00;
 	
 	DDRC = 0xFF;
 	PORTC = 0x00;
+	*/
 	
+	/*
 	//data
 	DDRA = 0xFF;
 	PORTA = 0b01100110;
 	
-	PORTD |= (1<<BE);
+	PORTD &= ~(1<<WRRD);
+	
+	_delay_ms(5000);
+	
 	PORTD |= (1<<WRRD);
 	
-	//_delay_ms(100);
+	_delay_ms(5000);
 	
-	for(uint8_t i = 0; i < 255; i++) {
+	PORTD &= ~(1<<OT);
+	_delay_ms(5000);
+	PORTD |= (1<<OT);
+	
+	PORTA = 0x00;
+	DDRA = 0x00;
+	
+	PORTD &= ~(1<<WRRD);
+	
+	PORTD &= ~(1<<OT);
+	_delay_ms(5000);
+	PORTD |= (1<<OT);
+	*/
+	
+	/*_delay_ms(4000);
+	
+	
+	DDRA = 0xFF;
+	
+
+	for(uint8_t i = 4; i <= 20; i++) {
 		PORTA = i;
 		PORTC = i;
 		
@@ -47,36 +71,78 @@ int main(void) {
 		asm volatile("nop");
 		asm volatile("nop");
 		PORTD |= (1<<OT);
+		
+		_delay_ms(1000);
 	}
+
 	
 	PORTD &= ~(1<<WRRD);
 	
-	PORTA = 0x00;
+	//_delay_ms(1000);
+	
 	DDRA = 0x00;
-	PORTD &= ~(1<<BE);
 	
-	asm volatile("nop");
-	asm volatile("nop");
+	//asm volatile("nop");
+	//asm volatile("nop");
 	
-	PORTD &= ~(1<<OT);
+	//_delay_ms(1);
+	
+	
+	
 
     while (1) {
-		for(uint8_t i = 0; i < 255; i++) {
+		
+		for(uint8_t i = 4; i < 255; i++) {
 			PORTC = i;
 			
-			_delay_ms(1000);
+			PORTD &= ~(1<<OT);
+			
+			_delay_ms(2000);
 		}
-    }
-	*/
+		
+    }*/
+	
+	_delay_ms(2000);
 	
 	initPorts();
-	initVideo();
-	sei();
+	_delay_ms(2000);
 	
-	fillVRAM(0, 0xFF);
+	initVideo();
+	
+	_delay_ms(2000);
+	
+	
+	//sei();
+	
+	fillVRAM(1, 0);
+	//drawPalette();
+	
+	sei();
 	
 	while(1) {
 		
 	}
+	
+	
+	/*
+	PORTA = 0xFF;
+	DDRA = 0xFF;
+	
+	PORTB = 0xFF;
+	DDRB = 0xFF;
+	
+	PORTC = 0xFF;
+	DDRC = 0xFF;
+	
+	PORTD = 0xFF;
+	DDRD = 0xFF;
+	
+	while(1) {
+		_delay_ms(500);
+		PORTC = 0x00;
+		_delay_ms(500);
+		PORTC = 0xFF;
+	}
+	*/
 }
 

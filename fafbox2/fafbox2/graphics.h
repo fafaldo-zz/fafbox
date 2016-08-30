@@ -7,6 +7,7 @@
 
 volatile uint8_t faf_lineCounterHigh;
 volatile uint8_t faf_lineCounterLow;
+volatile uint8_t faf_secondsCounter;
 
 
 void initVideo();
