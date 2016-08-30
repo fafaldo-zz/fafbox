@@ -4,42 +4,145 @@
  * Created: 02-08-2016 18:49:41
  * Author : fafik
  */ 
-#define F_CPU 20000000
+#define F_CPU 25175000
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "fafbox.h"
+#include "graphics.h"
 
+volatile uint8_t oneTime = 0;
+
+#define WRRD 2
+#define OT 4
 
 int main(void) {
-    CONTROL_DDR = 0xFF;
-	CONTROL_PORT = (1<<HSYNC_PIN | 1<<VSYNC_PIN | 1<<SOUND_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN | 1<<WRITE_READ_ENABLE_PIN | 1<<BANK_SWITCH_PIN | 1<<OUTPUT_ENABLE_PIN);
+	/*
+	//control
+    PORTD = 0xFF;
+	DDRD = 0xFF;
 	
-	DATA_DDR = 0xFF;
-	DATA_PORT = 0b00001110;
+	//addresses
+	DDRB = 0xFF;
+	PORTB = 0x00;
 	
-	LOWER_ADDRESS_DDR = 0xFF;
-	LOWER_ADDRESS_PORT = 0b10101010;
+	DDRC = 0xFF;
+	PORTC = 0x00;
+	*/
 	
-	HIGHER_ADDRESS_DDR = 0xFF;
-	HIGHER_ADDRESS_PORT = 0b01010101;
+	/*
+	//data
+	DDRA = 0xFF;
+	PORTA = 0b01100110;
 	
-	CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
-	_delay_ms(10000);
-	CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
+	PORTD &= ~(1<<WRRD);
+	
+	_delay_ms(5000);
+	
+	PORTD |= (1<<WRRD);
+	
+	_delay_ms(5000);
+	
+	PORTD &= ~(1<<OT);
+	_delay_ms(5000);
+	PORTD |= (1<<OT);
+	
+	PORTA = 0x00;
+	DDRA = 0x00;
+	
+	PORTD &= ~(1<<WRRD);
+	
+	PORTD &= ~(1<<OT);
+	_delay_ms(5000);
+	PORTD |= (1<<OT);
+	*/
+	
+	/*_delay_ms(4000);
 	
 	
-	DATA_DDR = 0x00;
-	DATA_PORT = 0x00;
-	
-	CONTROL_PORT &= ~(1<<WRITE_READ_ENABLE_PIN);
-	
-	CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+	DDRA = 0xFF;
 	
 
-	clearVRAM();
+	for(uint8_t i = 4; i <= 20; i++) {
+		PORTA = i;
+		PORTC = i;
+		
+		PORTD &= ~(1<<OT);
+		asm volatile("nop");
+		asm volatile("nop");
+		PORTD |= (1<<OT);
+		
+		_delay_ms(1000);
+	}
+
+	
+	PORTD &= ~(1<<WRRD);
+	
+	//_delay_ms(1000);
+	
+	DDRA = 0x00;
+	
+	//asm volatile("nop");
+	//asm volatile("nop");
+	
+	//_delay_ms(1);
+	
+	
+	
 
     while (1) {
-    }
+		
+		for(uint8_t i = 4; i < 255; i++) {
+			PORTC = i;
+			
+			PORTD &= ~(1<<OT);
+			
+			_delay_ms(2000);
+		}
+		
+    }*/
+	
+	_delay_ms(2000);
+	
+	initPorts();
+	_delay_ms(2000);
+	
+	initVideo();
+	
+	_delay_ms(2000);
+	
+	
+	//sei();
+	
+	fillVRAM(1, 0);
+	//drawPalette();
+	
+	sei();
+	
+	while(1) {
+		
+	}
+	
+	
+	/*
+	PORTA = 0xFF;
+	DDRA = 0xFF;
+	
+	PORTB = 0xFF;
+	DDRB = 0xFF;
+	
+	PORTC = 0xFF;
+	DDRC = 0xFF;
+	
+	PORTD = 0xFF;
+	DDRD = 0xFF;
+	
+	while(1) {
+		_delay_ms(500);
+		PORTC = 0x00;
+		_delay_ms(500);
+		PORTC = 0xFF;
+	}
+	*/
 }
 
