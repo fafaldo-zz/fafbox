@@ -59,11 +59,11 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 	//port by disabling buffer (PERIPHERAL_ENABLE_PIN). These chips pins are inverted, so driving our pin high actually disables component
 	CONTROL_PORT |= (1<<WRITE_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<READ_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
 
-	_delay_ms(2000);
+	//_delay_ms(2000);
 
 	//DATA_PORT = 0b00000011;
 	
-	_delay_ms(2000);
+	//_delay_ms(2000);
 
 	/*if(buffer == 0) {
 		CONTROL_PORT &= ~(1<<BANK_SWITCH_PIN);
@@ -98,10 +98,6 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 			
 			LOWER_ADDRESS_PORT = j;
 			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
-			nop();
-			nop();
-			nop();
-			nop();
 			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
 		}
 	}
@@ -109,7 +105,7 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 	//DATA_PORT = 0x00;
 	//DATA_DDR = 0x00;
 	
-	_delay_ms(2000);
+	//_delay_ms(2000);
 	
 	//DATA_PORT = 0b00000011;
 
