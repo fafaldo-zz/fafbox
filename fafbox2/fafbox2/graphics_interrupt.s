@@ -486,7 +486,7 @@ skip_clear_line_counter:
 	//we set PERIPHERAL_ENABLE_PIN to disable for now (we will turn it on after we set all ports as input), it should be turned off anyway but whatever
 	//we do not touch SOUND_PIN - pushing and poping sound bit should not override sound pin behavior
 	//we deselect NETWORK_ENABLE_PIN, it should be turned off anyway but whatever
-	ori r17, (1<<BANK_SWITCH_PIN | 1<<WRITE_READ_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN) ;1
+	ori r17, (1<<BANK_SWITCH_PIN | 1<<WRITE_ENABLE_PIN | 1<<READ_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN) ;1
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
 
 	//set port as input with pull-ups, before we open controller buffer
@@ -546,7 +546,7 @@ video:
 
 	mov r26, LINE_COUNTER_REGISTER_LOW ;1
 	mov r27, LINE_COUNTER_REGISTER_HIGH ;1
-	sbiw r26, 35 ;2
+	sbiw r26, 36 ;2
 
 	//TODO make sure we increment line counter in good place
 	//we divide line counter by 2, to doulbe each line and display 240 lines
@@ -557,219 +557,108 @@ video:
 
 highest_bit_not_set:
 
+	//call my_delay
+
+	/*
+	cpi LINE_COUNTER_REGISTER_LOW, 0
+	breq iszero
+	ldi r26, 1
+	rjmp iszerodalej
+iszero:
+	ldi r26, 2
+iszerodalej:
+*/
+	//ldi r16, 0b10101010
 	out _SFR_IO_ADDR(HIGHER_ADDRESS_PORT), r26 ;1
 	ldi r16, 0 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 
+
+	//cli
+
+	//call my_delay
+
+
 	//starting read will open video buffer
-	andi r17, ~(1<<WRITE_READ_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN) ;1
+	andi r17, ~(1<<READ_ENABLE_PIN) ;1
 
 	//15 cycles from beginning of HAP
 
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
 	
+	/*
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay
+	call my_delay*/
+	//call my_delay
+	
 	//256 pixels wide = 512 cycles, which leaves us with 128 cycles to do something else (64 on each end)
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	//call my_delay
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 
+	//call my_delay
+	inc r16 ;1
+	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+
+	//call my_delay
+
+	//sei
 
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
@@ -793,6 +682,7 @@ highest_bit_not_set:
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 	inc r16 ;1
@@ -971,8 +861,6 @@ highest_bit_not_set:
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-
-
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 	inc r16 ;1
@@ -1047,47 +935,12 @@ highest_bit_not_set:
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
 	inc r16 ;1
 	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
-	inc r16 ;1
-	out _SFR_IO_ADDR(LOWER_ADDRESS_PORT), r16 ;1
+	
 
 	//256 pixels sent
 	
 	//we stop reading (that will close video buffer) and outputting data
-	ori r17, (1<<WRITE_READ_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN) ;1
+	ori r17, (1<<READ_ENABLE_PIN) ;1
 	out _SFR_IO_ADDR(CONTROL_PORT), r17 ;1
 
 	//return data port to output, we not have any data left on RAM pins as we disabled output
@@ -1172,3 +1025,26 @@ no_inc:
 	pop r16 ;2
 
 	reti ;4-5 ?
+	
+my_delay:
+	
+
+	ldi r18, 0
+pe1:
+	ldi r19, 0
+pe2:
+	ldi r20, 0
+pe3:
+	inc r20
+	cpi r20, 255
+	brne pe3
+
+	inc r19
+	cpi r19, 255
+	brne pe2
+
+	inc r18
+	cpi r18, 255
+	brne pe1
+	
+	ret

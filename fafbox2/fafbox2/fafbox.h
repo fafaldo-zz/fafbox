@@ -31,9 +31,9 @@
 #define CONTROL_DDR DDRD
 #define HSYNC_PIN 0
 #define VSYNC_PIN 1
-#define WRITE_READ_ENABLE_PIN 2 //1 - write enable (read driven high), 0 - read enable (write driven high)
-#define BANK_SWITCH_PIN 3
-#define OUTPUT_ENABLE_PIN 4
+#define WRITE_ENABLE_PIN 3 //1 - write enable (read driven high), 0 - read enable (write driven high)
+#define BANK_SWITCH_PIN 4
+#define READ_ENABLE_PIN 2
 #define PERIPHERAL_ENABLE_PIN 5
 #define SOUND_PIN 6
 #define NETWORK_ENABLE_PIN 7

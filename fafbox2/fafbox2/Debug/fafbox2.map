@@ -243,7 +243,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x83a
+.text           0x00000000      0x6fc
  *(.vectors)
  .vectors       0x00000000       0x7c D:/programy/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.106/gcc/dev/atmega644pa/avr5/crtatmega644pa.o
                 0x00000000                __vector_default
@@ -332,26 +332,26 @@ END GROUP
                 0x000000b6                __vector_16
                 0x000000b6                __vector_18
                 0x000000b6                __vector_20
- .text          0x000000ba      0x6ae graphics_interrupt.o
+ .text          0x000000ba      0x520 graphics_interrupt.o
                 0x000000ba                __vector_13
-                0x00000768                . = ALIGN (0x2)
+                0x000005da                . = ALIGN (0x2)
  *(.text.*)
  .text.initPorts
-                0x00000768       0x1a fafbox.o
-                0x00000768                initPorts
+                0x000005da       0x1c fafbox.o
+                0x000005da                initPorts
  .text.initVideo
-                0x00000782       0x1e graphics.o
-                0x00000782                initVideo
+                0x000005f6       0x1e graphics.o
+                0x000005f6                initVideo
  .text.fillVRAM
-                0x000007a0       0x4c graphics.o
-                0x000007a0                fillVRAM
- .text.main     0x000007ec       0x4a main.o
-                0x000007ec                main
-                0x00000836                . = ALIGN (0x2)
+                0x00000614       0x9a graphics.o
+                0x00000614                fillVRAM
+ .text.main     0x000006ae       0x4a main.o
+                0x000006ae                main
+                0x000006f8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000836        0x0 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000836                _exit
-                0x00000836                exit
+ .fini9         0x000006f8        0x0 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x000006f8                _exit
+                0x000006f8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -370,11 +370,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000836        0x4 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x000006f8        0x4 d:/programy/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000083a                _etext = .
+                0x000006fc                _etext = .
 
-.data           0x00800100        0x2 load address 0x0000083a
+.data           0x00800100        0x2 load address 0x000006fc
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -411,8 +411,8 @@ END GROUP
  COMMON         0x0080048c        0x2 sound.o
                 0x0080048c                faf_notes
                 0x0080048e                PROVIDE (__bss_end, .)
-                0x0000083a                __data_load_start = LOADADDR (.data)
-                0x0000083c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000006fc                __data_load_start = LOADADDR (.data)
+                0x000006fe                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080048e        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -502,29 +502,29 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x791
+.debug_info     0x00000000      0x7c1
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000       0x83 fafbox.o
- .debug_info    0x00000083      0x32e graphics.o
- .debug_info    0x000003b1       0x66 graphics_interrupt.o
- .debug_info    0x00000417      0x22e main.o
- .debug_info    0x00000645      0x14c sound.o
+ .debug_info    0x00000083      0x35e graphics.o
+ .debug_info    0x000003e1       0x66 graphics_interrupt.o
+ .debug_info    0x00000447      0x22e main.o
+ .debug_info    0x00000675      0x14c sound.o
 
-.debug_abbrev   0x00000000      0x400
+.debug_abbrev   0x00000000      0x403
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x51 fafbox.o
- .debug_abbrev  0x00000051      0x1c5 graphics.o
- .debug_abbrev  0x00000216       0x14 graphics_interrupt.o
- .debug_abbrev  0x0000022a      0x12e main.o
- .debug_abbrev  0x00000358       0xa8 sound.o
+ .debug_abbrev  0x00000051      0x1c8 graphics.o
+ .debug_abbrev  0x00000219       0x14 graphics_interrupt.o
+ .debug_abbrev  0x0000022d      0x12e main.o
+ .debug_abbrev  0x0000035b       0xa8 sound.o
 
-.debug_line     0x00000000     0x1913
+.debug_line     0x00000000     0x14ed
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xcc fafbox.o
- .debug_line    0x000000cc      0x22b graphics.o
- .debug_line    0x000002f7     0x13c7 graphics_interrupt.o
- .debug_line    0x000016be      0x14b main.o
- .debug_line    0x00001809      0x10a sound.o
+ .debug_line    0x000000cc      0x2af graphics.o
+ .debug_line    0x0000037b      0xf1d graphics_interrupt.o
+ .debug_line    0x00001298      0x14b main.o
+ .debug_line    0x000013e3      0x10a sound.o
 
 .debug_frame    0x00000000       0xe0
  *(.debug_frame)
@@ -544,10 +544,10 @@ END GROUP
  .debug_str     0x00000252       0x86 sound.o
                                 0x1de (size before relaxing)
 
-.debug_loc      0x00000000       0x94
+.debug_loc      0x00000000       0xfd
  *(.debug_loc)
- .debug_loc     0x00000000       0x5f graphics.o
- .debug_loc     0x0000005f       0x35 sound.o
+ .debug_loc     0x00000000       0xc8 graphics.o
+ .debug_loc     0x000000c8       0x35 sound.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -567,12 +567,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x68
+.debug_ranges   0x00000000       0x80
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x10 fafbox.o
- .debug_ranges  0x00000010       0x28 graphics.o
- .debug_ranges  0x00000038       0x10 main.o
- .debug_ranges  0x00000048       0x20 sound.o
+ .debug_ranges  0x00000010       0x40 graphics.o
+ .debug_ranges  0x00000050       0x10 main.o
+ .debug_ranges  0x00000060       0x20 sound.o
 
 .debug_macro
  *(.debug_macro)

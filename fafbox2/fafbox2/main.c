@@ -105,14 +105,12 @@ int main(void) {
 	_delay_ms(2000);
 	
 	initPorts();
+	
 	_delay_ms(2000);
 	
 	initVideo();
 	
 	_delay_ms(2000);
-	
-	
-	//sei();
 	
 	fillVRAM(1, 0);
 	//drawPalette();

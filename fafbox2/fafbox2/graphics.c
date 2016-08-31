@@ -57,37 +57,59 @@ void clearVRAM() {
 void fillVRAM(uint8_t buffer, uint8_t color) {
 	//before we write to RAM, we clear WRITE_ENABLE_PIN and READ_ENABLE_PIN, we disable video buffer (because we are writing, not reading) by clearing BUFFER_ENABLE_PIN and controller
 	//port by disabling buffer (PERIPHERAL_ENABLE_PIN). These chips pins are inverted, so driving our pin high actually disables component
-	CONTROL_PORT |= (1<<WRITE_READ_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
+	CONTROL_PORT |= (1<<WRITE_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<READ_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
 
 	_delay_ms(2000);
 
-	DATA_PORT = 0b11100000;
+	//DATA_PORT = 0b00000011;
 	
 	_delay_ms(2000);
 
-	if(buffer == 0) {
+	/*if(buffer == 0) {
 		CONTROL_PORT &= ~(1<<BANK_SWITCH_PIN);
 	} else {
 		CONTROL_PORT |= (1<<BANK_SWITCH_PIN);
-	}
+	}*/
 
-	for(uint16_t i = 0; i < 0; i++) {
-		HIGHER_ADDRESS_PORT = i;
+	for(uint16_t k = 0; k < 240; k++) {
+		HIGHER_ADDRESS_PORT = k;
 		
-		for(uint16_t j = 0; j < 0; j++) {
+		for(uint16_t j = 0; j < 256; j++) {
+			//DATA_PORT = (i/15)*16 + (j/16);
+			
+			
+			if(j < 128) {
+				DATA_PORT = k < 120 ? 0b11100000 : 0b00000011;
+			} else {
+				DATA_PORT = k < 120 ? 0b00011100 : 0b11111111;
+			}
+			/*
+			if(k < 120) {
+				if(k < 120) {
+					DATA_PORT = 0b00011100;
+				} else {
+					DATA_PORT = 0b11100000;
+				}*/
+			//} else {
+				//continue;
+			//}
+				
+			//_delay_ms(2000);
+			
 			LOWER_ADDRESS_PORT = j;
-			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
 			nop();
 			nop();
 			nop();
 			nop();
-			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
 		}
 	}
 	
-	_delay_ms(2000);
+	//DATA_PORT = 0x00;
+	//DATA_DDR = 0x00;
 	
-	//CONTROL_PORT &= ~(1<<WRITE_READ_ENABLE_PIN);
+	_delay_ms(2000);
 	
 	//DATA_PORT = 0b00000011;
 
@@ -106,7 +128,7 @@ void fillVRAM(uint8_t buffer, uint8_t color) {
 	for current bank in use.
 */
 void drawPalette() {
-	CONTROL_PORT |= (1<<WRITE_READ_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<OUTPUT_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
+	CONTROL_PORT |= (1<<WRITE_ENABLE_PIN | 1<<PERIPHERAL_ENABLE_PIN | 1<<READ_ENABLE_PIN | 1<<NETWORK_ENABLE_PIN);
 
 	uint8_t color = 0;
 	
@@ -121,17 +143,18 @@ void drawPalette() {
 
 			CONTROL_PORT &= ~(1<<BANK_SWITCH_PIN);
 
-			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
 			nop();
-			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
 
 			CONTROL_PORT |= (1<<BANK_SWITCH_PIN);	
 
-			CONTROL_PORT &= ~(1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT &= ~(1<<WRITE_ENABLE_PIN);
 			nop();
-			CONTROL_PORT |= (1<<OUTPUT_ENABLE_PIN);
+			CONTROL_PORT |= (1<<WRITE_ENABLE_PIN);
 		}
 	}
+	
 	//LOWER_ADDRESS_DDR = 0x00;
 	//LOWER_ADDRESS_PORT = 0xFF;
 	//CONTROL_PORT &= ~(1<<PERIPHERAL_ENABLE_PIN);
