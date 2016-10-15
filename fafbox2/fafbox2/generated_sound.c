@@ -1,0 +1,11 @@
+#include "sound_controller.h"
+#include "generated_sound.h"
+
+
+const uint8_t SAMPLE_notes[9] PROGMEM {
+	NOTE_G4_VAL, NOTE_E4_VAL, NOTE_E4_VAL, NOTE_F4_VAL, NOTE_D4_VAL, NOTE_D4_VAL, NOTE_C4_VAL, NOTE_E4_VAL, NOTE_G4_VAL
+};
+
+const uint8_t SAMPLE_times[9] PROGMEM {
+	HALF_NOTE, HALF_NOTE, HALF_NOTE, HALF_NOTE, HALF_NOTE, HALF_NOTE, QUARTER_NOTE, QUARTER_NOTE, QUARTER_NOTE
+};
